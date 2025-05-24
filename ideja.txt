@@ -1,0 +1,5 @@
+sajt na kome ce da se nalaze igrice. 
+Te igrice ce i drugi korisnici moci da postavljaju i moci ce da ih kreiraju u game enginu na samom sajtu.
+Ocenjivanje igrica komentari ...
+Nagrade za najbolje igrice kao neka takmicenja.
+
