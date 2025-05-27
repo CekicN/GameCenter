@@ -6,6 +6,7 @@ import { LocalAuthGuard } from './guards/local-auth/local-auth.guard';
 import { RefreshAuthGuard } from './guards/refresh-auth/refresh-auth.guard';
 import { JwtAuthGuard } from './guards/jwt-auth/jwt-auth.guard';
 import { GoogleAuthGuard } from './guards/google-auth/google-auth.guard';
+import { UserDto } from 'src/users/dtos/users.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -15,9 +16,15 @@ export class AuthController {
     @HttpCode(HttpStatus.OK)
     @UseGuards(LocalAuthGuard)
     @Post('login')
-    async login(@Request() req)
+    async login(@Body() loginDto: {email:string, password:string})
     {
-        return await this.authService.login(req.user.id, req.user.email);
+        return await this.authService.login(loginDto.email, loginDto.password);
+    }
+
+    @Post('register')
+    async register(@Body() userDto:UserDto)
+    {
+        return this.authService.register(userDto);
     }
 
     @UseGuards(RefreshAuthGuard)
@@ -41,8 +48,8 @@ export class AuthController {
     @UseGuards(GoogleAuthGuard)
     @Get('google/callback')
     async googleCallback(@Req() req, @Res() res){
-        const response = await this.authService.login(req.user.id, req.user.email)
+        const response = await this.authService.loginWithId(req.user.id, req.user.email)
 
-        res.redirect(`http://localhost:4200?token=${response.accessToken}`);
+        res.redirect(`http://localhost:4200/games?token=${response.accessToken}`);
     }
 }

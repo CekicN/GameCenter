@@ -13,3 +13,7 @@
 {
     font-family: 'Anta';
 }
+input
+{
+    border: 2px solid white;
+}

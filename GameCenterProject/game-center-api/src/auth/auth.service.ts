@@ -4,10 +4,12 @@ import { UsersService } from 'src/users/users.service';
 import { AuthJwtPayload } from './types/auth-jwtPayload';
 import refreshJwtConfig from './config/refresh-jwt.config';
 import { ConfigType } from '@nestjs/config';
-const bcrypt = require('bcrypt');
+import * as bcrypt from 'bcrypt';
 import * as argon2 from 'argon2';
 import { CurrentUser } from './types/current-user';
 import { UserDto } from 'src/users/dtos/users.dto';
+import { User } from 'src/users/entities/user.entity';
+import { Profile } from 'src/users/entities/profile.entity';
 
 @Injectable()
 export class AuthService {
@@ -28,7 +30,47 @@ export class AuthService {
         return {id: user.id, email}; 
     }
 
-    async login(userId: number, email: string)
+    async register(userDto:UserDto)
+    {
+        const user = await this.userService.findByEmail(userDto.email);
+        if(user)
+            throw new BadRequestException("User with that email exist");
+
+        if(userDto.password !== userDto.confirmPassword)
+            throw new BadRequestException("Passwords are not equal");
+        console.log(userDto)
+        const salt = await bcrypt.genSalt();
+        const password = await bcrypt.hash(userDto.password, salt);
+
+        const username = userDto.email.split('@')[0];
+        
+        const profile = Profile.create({ username })
+        await profile.save();
+        
+        const newUser = User.create({
+            email:userDto.email,
+            password,
+            createdAt: new Date(),
+            profile
+        })
+        
+        return newUser.save();
+    }
+
+    async login(email:string, password:string)
+    {
+        const user = await this.userService.findByEmail(email);
+        if(!user)
+            throw new BadRequestException("User doesn't exist");
+
+        const isMatch = await bcrypt.compare(password, user.password);
+        if(!isMatch)
+            throw new BadRequestException("Incorrect password");
+
+        return await this.loginWithId(user.id, email);
+    }
+
+    async loginWithId(userId: number, email: string)
     {
         // const payload:AuthJwtPayload = { 
         //     sub:userId,
@@ -47,6 +89,7 @@ export class AuthService {
             refreshToken
         }
     }
+
 
     async generateTokens(userId:number, email:string)
     {
@@ -110,6 +153,6 @@ export class AuthService {
 
         if(user) return user;
 
-        return await this.userService.createUser(googleUser);
+        return await this.register(googleUser);
     }
 }

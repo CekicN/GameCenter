@@ -11,12 +11,6 @@ export class UsersController {
     
     constructor(private userService: UsersService){}
 
-    @Post('create')
-    createUser(@Body() userDto:UserDto)
-    {
-        return this.userService.createUser(userDto);
-    }
-
     @UseGuards(JwtAuthGuard)
     @Get('profile')
     getProfile(@Req() req)

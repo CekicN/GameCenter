@@ -2,7 +2,7 @@
     <div class="flex flex-col w-1/4 items-center pt-10">
         <span class="text-white text-4xl tracking-widest">Login</span>
 
-        <form [formGroup]="loginForm" class="text-white">
+        <form [formGroup]="loginForm" class="text-white flex flex-col justify-center">
             
             <!--EMAIL-->
             <div class="form-group pt-3">
@@ -25,8 +25,10 @@
             </div>
             <small *ngIf="loginForm.controls['password'].dirty && loginForm.hasError('required','password')" class="text-red-600">*Password is required! </small>
             
-            <button (click)="onSubmit()" type="submit" class="btn btn-success btn-blcok mt-4 w-100"> Login </button>
-            <div class="text-center pt-4 text-muted">Don't have an account?<a routerLink="/register" href="" class="sign">Sign Up</a> </div>
+            <button (click)="onSubmit()" type="submit" class="btn text-white hover:bg-pink-700 text-2xl btn-blcok mt-4 w-100 bg-pink-600 rounded-lg p-2"> Login </button>
+            <div class="text-center pt-4 text-muted">Don't have an account?<a routerLink="/register" class="sign">Sign Up</a></div>
+
+            <button (click)="googleLogin()" type="submit" class="btn hover:bg-pink-700 text-2xl btn-blcok mt-4 rounded-lg p-2"><fa-icon [icon]="['fab', 'google']"></fa-icon> Google </button>
         </form>
     </div>
     <!--Slika-->

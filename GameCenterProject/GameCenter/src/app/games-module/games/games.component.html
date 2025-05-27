@@ -1,0 +1,6 @@
+<button (click)="openModal()" class="btn rounded-lg bg-white p-3 ml-2 hover:bg-gray-300">Add Game</button>
+<div class="w-full flex flex-wrap">
+    <app-game-card *ngFor="let game of games" [id]="game.id" [title]="game.title" [text]="game.description" [imageUrl]="game.imageUrl"></app-game-card>
+</div>
+
+<app-modal></app-modal>

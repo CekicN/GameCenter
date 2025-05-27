@@ -1,6 +1,7 @@
-import { BaseEntity, Column, CreateDateColumn, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, CreateDateColumn, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Profile } from "./profile.entity";
 import { Role } from "src/auth/enums/role.enum";
+import { Game } from "src/games/entities/game.entity";
 
 @Entity({name: 'users'})
 export class User extends BaseEntity
@@ -33,4 +34,7 @@ export class User extends BaseEntity
     @OneToOne(type => Profile, profile => profile.user)
     @JoinColumn()
     profile:Profile;
+
+     @OneToMany(type => Game, game => game.user)
+     games:Game[];
 }
