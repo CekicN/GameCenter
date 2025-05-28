@@ -345,12 +345,17 @@ export class GamesController {
 
 ```bash
 git clone https://github.com/CekicN/GameCenter.git
-cd GameCenterProject/game-center-api
 ```
-
+- Struktura
+```bash
+GameCenterProject/
+├── GameCenter
+└── game-center-api
+```
 - Instalacija i pokretanje NestJS-a, pokrece se defaultno na port-u 3000:
 
 ```bash
+cd game-center-api
 npm install
 npm run start:dev
 ```
@@ -371,3 +376,5 @@ npm run start
    GET zahtev na ```/games/getAllGames``` prikazuje sve igre koje su dodate.
 3. Kreiranje igre:
    POST zahtev na ```/games/addGame/```.
+4. Dodavanje slike za igru
+   POST zahtev na ```/games/upload/:id```.
