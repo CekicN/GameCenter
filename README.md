@@ -16,11 +16,6 @@ Projekat omogućava korisnicima da kreiraju, ažuriraju i brišu igre uz autenti
 3. [Kreiranje i Struktura NestJS Projekta](#kreiranje-i-struktura-nestjs-projekta)
 4. [Integracija PassportJS](integracija-passportjs)
 5. [Kreiranje Aplikacije](#kreiranje-aplikacije)
-6. [Django ORM i Podržane Baze Podataka](#django-orm-i-podržane-baze-podataka)
-7. [Autentifikacija i Autorizacija](#autentifikacija-i-autorizacija)
-8. [CRUD Operacije u Djangu](#crud-operacije-u-djangu)
-9. [Integracija sa React-om](#integracija-sa-react-om)
-10. [Korišćenje i Pokretanje Projekta](#korišćenje-i-pokretanje-projekta)
 
 ---
 
