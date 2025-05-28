@@ -341,4 +341,33 @@ export class GamesController {
 
 ## Korišćenje i pokretanje projekta
 
+- Kloniranje repozitorijuma komdandama:
 
+```bash
+git clone https://github.com/CekicN/GameCenter.git
+cd GameCenterProject/game-center-api
+```
+
+- Instalacija i pokretanje NestJS-a, pokrece se defaultno na port-u 3000:
+
+```bash
+npm install
+npm run start:dev
+```
+
+- Pokretanje Angular frontenda, pokrece se defaultno na port-u 4200:
+
+```bash
+cd GameCenter
+npm install
+npm run start
+```
+
+#### Korišćenje
+
+1. Prijava korisnika (Login, registracija):
+   Iz angulara se salje Post request na ```/auth/login``` ili ```auth/register``` kako bi dobio access i refresh token.
+2. Pregled igara:
+   GET zahtev na ```/games/getAllGames``` prikazuje sve igre koje su dodate.
+3. Kreiranje igre:
+   POST zahtev na ```/games/addGame/```.
