@@ -22,7 +22,7 @@ export class GameCardComponent implements OnInit {
 
   edit()
   {
-    this.gameService.openModal(`edit/${this.id}`);
+    this.gameService.openModal(`edit/${this.id}/${this.title}/${this.text}`);
   }
 
   delete()

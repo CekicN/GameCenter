@@ -14,7 +14,7 @@ import { GamesModule } from './games/games.module';
       host: 'localhost',
       port: 3306,
       username: 'root',
-      password: 'Nc@31012002',
+      password: '123456',
       connectTimeout: 60 * 60 * 1000,
       database: 'gamecenterdb',
       entities: [__dirname + '/**/entities/*.entity{.ts,.js}'],

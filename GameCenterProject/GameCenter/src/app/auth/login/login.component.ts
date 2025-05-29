@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { faGoogle } from '@fortawesome/free-brands-svg-icons';
-import { library } from '@fortawesome/fontawesome-svg-core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 @Component({
@@ -16,7 +14,6 @@ export class LoginComponent {
   
   constructor(private fb: FormBuilder, private authService:AuthService, private router:Router)
   {
-    library.add(faGoogle)
   }
 
   ngOnInit():void{

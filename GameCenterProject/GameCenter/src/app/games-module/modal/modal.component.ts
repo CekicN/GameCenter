@@ -18,7 +18,18 @@ export class ModalComponent implements OnInit{
   constructor(private fb: FormBuilder,private gameService:GamesService){}
 
   ngOnInit(): void {
-    this.gameService.isOpenedModal$.subscribe(state => this.isModalOpen = state);
+    this.gameService.isOpenedModal$.subscribe(state => {
+      this.isModalOpen = state
+      if(state != "add" && state != "false")
+      {
+            const title = this.isModalOpen.split("/")[2]
+            const description = this.isModalOpen.split("/")[3]
+            this.gameForm.patchValue({
+              title,
+              description
+            })
+      }
+    });
     this.gameForm=this.fb.group({
       title: ['',[Validators.required]],
       description:['',[Validators.required]]
@@ -75,6 +86,7 @@ export class ModalComponent implements OnInit{
   editGame(){
     const id = Number.parseInt(this.isModalOpen.split("/")[1])
 
+    console.log(this.gameForm)
     if (this.gameForm.valid) {
       this.gameService.updateGame(id, this.gameForm.value).subscribe(data => {
         this.closeModal();

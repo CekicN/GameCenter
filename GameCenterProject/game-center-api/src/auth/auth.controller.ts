@@ -50,6 +50,6 @@ export class AuthController {
     async googleCallback(@Req() req, @Res() res){
         const response = await this.authService.loginWithId(req.user.id, req.user.email)
 
-        res.redirect(`http://localhost:4200/games?token=${response.accessToken}`);
+        res.redirect(`http://localhost:4200/games/?token=${response.accessToken}`);
     }
 }
